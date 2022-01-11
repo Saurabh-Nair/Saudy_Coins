@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h1>Welcome back, {{session.get('name')}}</h1>
+{% include 'includes/_messages.html' %}
+<p></p>
+
+<p>Your available balance is {{ balance }} SDC</p>
+<h2>Blockchain</h2>
+  <div class="card-body">
+    <div class="table-responsive">
+	<style>
+		table, th, td {
+			border: 1px solid black;
+			padding: 15px;
+			border-collapse: collapse;
+		}
+	  </style>
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Transaction</th>
+            <th>Hash</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Transaction</th>
+            <th>Hash</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for block in blockchain %}
+            <tr>
+              <td>{{block.number}}</td>
+              <td>{{block.data}}</td>
+              <td>{{block.hash()}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted">Updated today at {{ct}}</div>
+</div>
+{% endblock %}
